@@ -11,14 +11,21 @@ import ReactJS from '../components/Body/Reactjs.component';
 import MongoDB from '../components/Body/Mongodb.component';
 
 const AppRouter = () => (
-	<Router history={createBrowserHistory()}>
-		<Route path="/" component={AppLayout} >
-			<Route component={NodeJS} />
-			<Route path="express" component={ExpressJS} />
-			<Route path="mongo" component={MongoDB} />
-			<Route path="react" component={ReactJS} />
-		</Route>
-	</Router>
+	// <Router history={createBrowserHistory()}>
+	// 	<Route path="/" component={AppLayout} >
+	// 		<Route component={NodeJS} />
+	// 		<Route path="express" component={ExpressJS} />
+	// 		<Route path="mongo" component={MongoDB} />
+	// 		<Route path="react" component={ReactJS} />
+	// 	</Route>
+	// </Router>
+	<BrowserRouter>
+		<Route path="/" component={AppLayout}></Route>
+		<Route path="/nodejs" component={NodeJS} />
+		<Route path="/express" component={ExpressJS} />
+		<Route path="/mongo" component={MongoDB} />
+		<Route path="/react" component={ReactJS} />
+	</BrowserRouter>
 );
 
 export default AppRouter;

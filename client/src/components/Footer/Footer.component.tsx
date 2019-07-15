@@ -3,11 +3,11 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 export default class Footer extends React.Component {
-	render(){
+	render() {
 		return (
 			<div className="container">
 				<div className="btn-group">
-					<Link to="/">
+					<Link to="/nodejs">
 						<button className="btn btn-default btn-sm">NodeJS</button>
 					</Link>
 					<Link to="/express">

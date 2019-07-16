@@ -1,20 +1,18 @@
 import { createStore, Store, applyMiddleware } from 'redux';
-import reducer from '../reducers/index.reducer';
+import { reducer, IApplicationState } from '../reducers/index.reducer';
 import { routerMiddleware } from 'react-router-redux';
-
-export interface ApplicationState {
-
-}
 
 
 export default function configureStore(
-	initialState: ApplicationState
-): Store<ApplicationState> {
+	initialState: IApplicationState
+): Store<IApplicationState> {
 
 	const store = createStore(
 		reducer,
 		initialState
 	);
+
+
 
 	if (module.hot) {
 		// enable webpack hot module replacement for reducers

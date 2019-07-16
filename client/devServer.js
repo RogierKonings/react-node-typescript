@@ -1,20 +1,46 @@
-var path = require('path');
-var webpack = require('webpack');
-var express = require('express');
-var config = require('../webpack.config');
+const path = require('path');
+const webpack = require('webpack');
+const express = require('express');
+const config = require('../webpack.config');
 
 const proxyMiddleware = require('http-proxy-middleware');
 
-var app = express();
-var compiler = webpack(config);
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+
+const app = express();
+const compiler = webpack(config);
+
+const port = process.env.PORT || 3000;
 
 const devConfig = config.devServer;
 
-app.use(require('webpack-dev-middleware')(compiler, {
-  publicPath: config.output.publicPath
+// app.use(function(req, res, next) {
+//   res.writeHead(200, {
+//     'Content-Type': 'text/event-stream',
+//     'Cache-Control': 'no-cache',
+//     'Connection': 'keep-alive'
+//   });
+//   next();
+// });
+
+app.use(webpackDevMiddleware(compiler, {
+  hot: true,
+  filename: 'bundle.js',
+  publicPath: config.output.publicPath,
+  stats: {
+    colors: true
+  },
+  historyApiFallback: true
 }));
 
-app.use(require('webpack-hot-middleware')(compiler));
+
+
+app.use(webpackHotMiddleware(compiler, {
+  log: console.log,
+  path: '/__webpack_hmr',
+  heartbeat: 10 * 1000
+}));
 
 // Set up the proxy.
 if(devConfig.proxy) {
@@ -23,14 +49,15 @@ if(devConfig.proxy) {
   });
 }
 
+
 app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'src', 'index.html'));
+  res.sendFile(path.join(__dirname, 'app', 'index.html'));
 });
 
-app.listen(3000, function(err) {
+app.listen(port, function(err) {
   if (err) {
     return console.error(err);
   }
 
-  console.log('FrontEnd Server Listening at http://localhost:3000/');
+  console.log('server running');
 });

@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=production npm run build-client:production && forever ./bin/www",
-    "start-server:development": "cross-env NODE_ENV=development nodemon --ignore 'client/' ./bin/www",
-    "start-client:development": "cross-env NODE_ENV=development node ./client/devServer",
+    "start-server:development": "cross-env NODE_ENV=development ts-node-dev --ignore 'client/' ./bin/www",
+    "start-client:development": "cross-env NODE_ENV=development tsc && node ./build/devServer",
     "build-client:production": "cross-env NODE_ENV=production webpack -p --progress"
   },
   "repository": {
@@ -52,8 +52,11 @@
     "url-loader": "2.0.1"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.1",
+    "@types/express": "^4.17.0",
     "@types/history": "4.7.2",
-    "@types/node": "12.6.3",
+    "@types/morgan": "^1.7.35",
+    "@types/node": "^12.6.3",
     "@types/react": "16.8.23",
     "@types/react-dom": "16.8.4",
     "@types/react-redux": "7.1.1",
@@ -69,6 +72,7 @@
     "react-hot-loader": "^4.12.6",
     "source-map-loader": "0.2.4",
     "ts-loader": "6.0.4",
+    "ts-node-dev": "^1.0.0-pre.40",
     "typescript": "3.5.3",
     "webpack": "4.35.3",
     "webpack-cli": "3.3.6",

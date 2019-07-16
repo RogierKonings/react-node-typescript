@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=production npm run build-client:production && forever ./bin/www",
-    "dev": "cross-env NODE_ENV=development npm run start-server:development && npm run start-client:development",
     "start-server:development": "cross-env NODE_ENV=development nodemon --ignore 'client/' ./bin/www",
     "start-client:development": "cross-env NODE_ENV=development node ./client/devServer",
     "build-client:production": "cross-env NODE_ENV=production webpack -p --progress"

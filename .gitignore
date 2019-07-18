@@ -3,6 +3,8 @@ node_modules/
 
 ## build
 dist/
+# build/
+
 
 ## debug logs
 npm-debug*

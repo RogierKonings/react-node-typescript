@@ -2,6 +2,7 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
+    "lib": ["es6"],
     "module": "commonjs",
     "noImplicitAny": true,
     "outDir": "./build/",
@@ -11,9 +12,9 @@
     "target": "es5",
     "moduleResolution": "node"
   },
-  // "include": [
-  //   "client/app/**/**/*"
-  // ],
+  "include": [
+    "client/app/**/**/*", "server/**/*"
+  ],
   "lib": [
     "es2015"
   ]

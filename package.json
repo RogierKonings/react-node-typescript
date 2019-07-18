@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=production npm run build-client:production && forever ./bin/www",
-    "start-server:development": "cross-env NODE_ENV=development ts-node-dev --ignore 'client/' ./bin/www",
-    "start-client:development": "cross-env NODE_ENV=development tsc && node ./build/devServer",
+    "start-server:development": "cross-env NODE_ENV=development ts-node-dev --ignore 'client/' ./server/index",
+    "start-client:development": "cross-env NODE_ENV=development tsc && node ./client/devServer",
     "build-client:production": "cross-env NODE_ENV=production webpack -p --progress"
   },
   "repository": {

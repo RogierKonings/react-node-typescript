@@ -1,8 +1,9 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 
-const ENTRY_POINTS = ['./client/app/index'];
+const ENTRY_POINTS = ['./application/client/app/index'];
 const DEV_ENTRY_POINTS = ENTRY_POINTS.concat(['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000']);
 
 module.exports = {
@@ -21,27 +22,28 @@ module.exports = {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
-                loaders: ['react-hot-loader/webpack', 'ts-loader']
+                loaders: ['ts-loader']
             },
             {
                 test: /\.css$/,
-                loaders: ['react-hot-loader/webpack', 'css-loader']
+                loaders: ['css-loader']
             },
             {
                 test: /\.html$/,
-                loaders: ['react-hot-loader/webpack', 'file-loader?name=[name].[ext]']
+                loaders: ['file-loader?name=[name].[ext]']
             },
         ]
     },
     devServer: {
         proxy: {
-          '/api':{
-            target: 'http://localhost:3000'
-          }
-      }
+            '/api': {
+                target: 'http://localhost:3000'
+            }
+        }
     },
     plugins: [
         // new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'client', 'src', 'index.html') }),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        // new CleanWebpackPlugin(['dist', 'build'])
     ]
 }

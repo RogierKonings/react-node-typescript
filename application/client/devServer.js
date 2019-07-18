@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const express = require('express');
-const config = require('../webpack.config');
+const config = require('../../webpack.config');
 
 const proxyMiddleware = require('http-proxy-middleware');
 
@@ -35,18 +35,18 @@ app.use(webpackHotMiddleware(compiler, {
 }));
 
 // Set up the proxy.
-if(devConfig.proxy) {
-  Object.keys(devConfig.proxy).forEach(function(context) {
+if (devConfig.proxy) {
+  Object.keys(devConfig.proxy).forEach(function (context) {
     app.use(proxyMiddleware(context, devConfig.proxy[context]));
   });
 }
 
 
-app.get('*', function(req, res) {
+app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'app', 'index.html'));
 });
 
-app.listen(port, function(err) {
+app.listen(port, function (err) {
   if (err) {
     return console.error(err);
   }

@@ -12,7 +12,34 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js',
-        publicPath: '/'
+        chunkFilename: '[name].js',
+        publicPath: '/',
+    },
+    optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+            chunks: 'all',
+            maxInitialRequests: Infinity,
+            minSize: 0,
+            cacheGroups: {
+                reactVendor: {
+                    test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+                    name: 'react-vendor'
+                },
+                utilityVendor: {
+                    test: /[\\/]node_modules[\\/](lodash|moment|moment-timezone)[\\/]/,
+                    name: 'utility-vendor'
+                },
+                bootstrapVendor: {
+                    test: /[\\/]node_modules[\\/](react-bootstrap)[\\/]/,
+                    name: 'bootstrap-vendor'
+                },
+                vendor: {
+                    test: /[\\/]node_modules[\\/](!react-bootstrap)(!lodash)(!moment)(!moment-timezone)[\\/]/,
+                    name: 'vendor'
+                }
+            }
+        }
     },
     devtool: 'source-map',
     resolve: {
@@ -44,6 +71,6 @@ module.exports = {
     plugins: [
         // new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'client', 'src', 'index.html') }),
         new webpack.HotModuleReplacementPlugin(),
-        // new CleanWebpackPlugin(['dist', 'build'])
+        new CleanWebpackPlugin()
     ]
 }

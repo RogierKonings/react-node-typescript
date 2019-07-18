@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start-server": "cross-env NODE_ENV=development ts-node-dev --ignore 'client/' ./application/server/index",
-    "start-client": "cross-env NODE_ENV=development tsc && node ./application/client/devServer"
+    "start-client": "cross-env NODE_ENV=development tsc && node ./application/client/devServer",
+    "build-client": "cross-env NODE_ENV=production webpack -p --progress"
   },
   "repository": {
     "type": "git",
@@ -73,8 +74,6 @@
     "ts-loader": "6.0.4",
     "ts-node-dev": "1.0.0-pre.40",
     "typescript": "3.5.3",
-    "webpack": "4.35.3",
-    "webpack-cli": "3.3.6",
     "webpack-dev-middleware": "3.7.0",
     "webpack-hot-middleware": "2.25.0"
   }

@@ -51,5 +51,5 @@ app.listen(port, function (err) {
     return console.error(err);
   }
 
-  console.log('server running');
+  console.log(`server running at port ${port}`);
 });

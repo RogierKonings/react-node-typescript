@@ -1,1 +1,0 @@
-{"version":3,"file":"index.reducer.js","sourceRoot":"","sources":["../../../../client/app/reducers/index.reducer.tsx"],"names":[],"mappings":";;AASA,IAAM,YAAY,GAAsB,EAEvC,CAAA;AAEY,QAAA,OAAO,GAAG,UAAC,KAAuC,EAAE,MAAe;IAAxD,sBAAA,EAAA,oBAAuC;IAE9D,QAAO,MAAM,CAAC,IAAI,EAAE;QAEnB;YACC,OAAO,KAAK,CAAC;KACd;AACF,CAAC,CAAC"}

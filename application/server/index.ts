@@ -1,6 +1,5 @@
 import app from './app';
-
-const cluster = require('cluster');
+import * as cluster from 'cluster';
 
 const DEFAULT_PORT = 3000;
 const port = process.env.PORT || DEFAULT_PORT;
@@ -18,13 +17,13 @@ class Server {
             const numWorkers = require('os').cpus().length;
 
             console.log('Master cluster setting up', numWorkers, 'workers....');
-            for(let i = 0; i < numWorkers; i++) cluster.fork();
+            for (let i = 0; i < numWorkers; i++) cluster.fork();
 
             cluster.on('online', (worker: any) => console.log('Worker', worker.process.pid, 'is online'));
             cluster.on('exit', (worker: any, code: any, signal: any) => {
-              console.log('Worker', worker.process.pid, 'died with code:', code, ', and signal:', signal);
-              console.log('Starting a new worker');
-              cluster.fork();
+                console.log('Worker', worker.process.pid, 'died with code:', code, ', and signal:', signal);
+                console.log('Starting a new worker');
+                cluster.fork();
             });
 
         } else {

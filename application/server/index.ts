@@ -1,5 +1,9 @@
 import app from './app';
 import * as cluster from 'cluster';
+import * as dotenv from 'dotenv';
+
+
+dotenv.config();
 
 const DEFAULT_PORT = 3000;
 const port = process.env.PORT || DEFAULT_PORT;

@@ -1,6 +1,12 @@
 ## libarary and third party dependencies
 node_modules/
 
+## settings
+.env
+
 ## build
 dist/
 build/
+
+## version control
+package-lock.json

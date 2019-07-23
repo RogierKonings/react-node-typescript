@@ -1,6 +1,5 @@
 import * as express from 'express';
 import * as superagent from 'superagent';
-import { Router } from 'express';
 import Endpoints from '../configuration/endpoints';
 import HttpException from '../exceptions/http-exception';
 

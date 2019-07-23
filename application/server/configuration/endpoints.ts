@@ -1,5 +1,3 @@
-
-
 const ENDPOINTS = {
     TRAVEL_INFORMATION: {
         BASE_URL: 'https://gateway.apiportal.ns.nl/public-reisinformatie/api/',
@@ -14,5 +12,7 @@ class TravelInformation {
     }
 }
 
-const Endpoints = new TravelInformation();
+const Endpoints = {
+    TravelInformation: new TravelInformation()
+}
 export default Endpoints;

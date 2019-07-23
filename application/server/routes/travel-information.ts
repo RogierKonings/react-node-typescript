@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as superagent from 'superagent';
 import { Router } from 'express';
-import Endpoints from '../config/endpoints';
+import Endpoints from '../configuration/endpoints';
 
 
 const API_KEY = process.env.API_KEY;
@@ -20,12 +20,12 @@ class TravelInformation {
         this.getAllStations();
     }
 
-    private getAllStations() {
+    private getAllStations(): void {
 
         this.router.get('/stations', (req: any, res: any, next: any) => {
 
             superagent
-                .get(Endpoints.getStations())
+                .get(Endpoints.TravelInformation.getStations())
                 .set(this.headers)
                 .end((error: any, response: any) => {
                     if (error) { return error; }

@@ -1,15 +1,13 @@
 import * as express from 'express';
 import * as superagent from 'superagent';
-import { Router } from 'express';
-import Endpoints from '../config/endpoints';
-
+import Endpoints from '../configuration/endpoints';
+import HttpException from '../exceptions/http-exception';
 
 const API_KEY = process.env.API_KEY;
 
-
 class TravelInformation {
 
-    public router: Router;
+    public router: express.Router;
 
     get headers(): Object {
         return { 'Ocp-Apim-Subscription-Key': API_KEY }
@@ -17,17 +15,16 @@ class TravelInformation {
 
     constructor() {
         this.router = express.Router();
-        this.getAllStations();
     }
 
     private getAllStations() {
 
-        this.router.get('/stations', (req: any, res: any, next: any) => {
+        this.router.get('/stations', (req: express.Request, res: express.Response, next: express.NextFunction) => {
 
             superagent
                 .get(Endpoints.getStations())
                 .set(this.headers)
-                .end((error: any, response: any) => {
+                .end((error: HttpException, response: superagent.Response) => {
                     if (error) { return error; }
                     res.send(response.text);
                 });
@@ -36,6 +33,5 @@ class TravelInformation {
     }
 
 }
-
 
 module.exports = new TravelInformation().router;

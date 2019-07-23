@@ -21,7 +21,7 @@ class TravelInformation {
     private getAllStations() {
 
         this.router.get('/stations', (req: express.Request, res: express.Response, next: express.NextFunction) => {
-
+            console.log(this.headers);
             superagent
                 .get(Endpoints.TravelInformation.getStations())
                 .set(this.headers)

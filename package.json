@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start-server": "cross-env NODE_ENV=development ts-node-dev --ignore 'client/' ./application/server/index",
+    "start-server": "cross-env NODE_ENV=development ts-node-dev --inspect --ignore 'client/' ./application/server/index",
     "start-client": "cross-env NODE_ENV=development tsc && node ./application/client/devServer",
     "build-client": "cross-env NODE_ENV=production webpack -p --progress"
   },

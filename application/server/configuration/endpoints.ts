@@ -14,5 +14,5 @@ class TravelInformation {
     }
 }
 
-const Endpoints = new TravelInformation();
+const Endpoints = { TravelInformation: new TravelInformation() };
 export default Endpoints;

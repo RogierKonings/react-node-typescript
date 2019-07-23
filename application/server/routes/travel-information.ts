@@ -15,6 +15,7 @@ class TravelInformation {
 
     constructor() {
         this.router = express.Router();
+        this.getAllStations();
     }
 
     private getAllStations() {
@@ -22,7 +23,7 @@ class TravelInformation {
         this.router.get('/stations', (req: express.Request, res: express.Response, next: express.NextFunction) => {
 
             superagent
-                .get(Endpoints.getStations())
+                .get(Endpoints.TravelInformation.getStations())
                 .set(this.headers)
                 .end((error: HttpException, response: superagent.Response) => {
                     if (error) { return error; }

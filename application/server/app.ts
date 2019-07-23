@@ -2,11 +2,14 @@ import * as express from 'express';
 import path from 'path';
 import * as travelInformation from './routes/travel-information';
 import HttpException from './exceptions/http-exception';
+import * as addRequestId from 'express-request-id';
+import * as logger from 'morgan';
+import * as bodyParser from 'body-parser';
+
 
 // const favicon = require('serve-favicon');
 // const logger = require('morgan');
 // const cookieParser = require('cookie-parser');
-// const bodyParser = require('body-parser');
 
 
 class App {
@@ -14,10 +17,19 @@ class App {
 
   constructor() {
     this.express = express();
+    this.setBodyParser();
     this.setSecurityHeaders();
+    this.setLogger();
     this.mountRoutes();
 
     this.setErrorHandling();
+  }
+
+  private setBodyParser(): void {
+    this.express.use(bodyParser.json());
+    this.express.use(bodyParser.urlencoded({
+      extended: true
+    }));
   }
 
   private setSecurityHeaders(): void {
@@ -27,6 +39,28 @@ class App {
       res.header('X-XSS-Protection', '1; mode=block');
       next();
     });
+  }
+
+  private setLogger(): void {
+    this.express.use(addRequestId());
+    logger.token('id', (req: any) => {
+      return req.id
+    });
+
+    const loggerFormat = ':id :remote-addr :remote-user :method :url HTTP/:http-version :status :res[content-length] - :response-time ms';
+
+    this.express.use(logger(loggerFormat, {
+      skip: (req: express.Request, res: express.Response) => {
+        return res.statusCode < 400
+      },
+      stream: process.stderr
+    }));
+    this.express.use(logger(loggerFormat, {
+      skip: (req: express.Request, res: express.Response) => {
+        return res.statusCode >= 400
+      },
+      stream: process.stdout
+    }));
   }
 
   private mountRoutes(): void {

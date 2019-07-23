@@ -11,7 +11,9 @@ class TravelInformation {
     public router: express.Router;
 
     get headers(): Object {
-        return { 'Ocp-Apim-Subscription-Key': API_KEY }
+        return {
+            'Ocp-Apim-Subscription-Key': API_KEY
+        }
     }
 
     constructor() {
@@ -22,13 +24,15 @@ class TravelInformation {
     private getAllStations(): void {
 
         this.router.get('/stations', (req: express.Request, res: express.Response, next: express.NextFunction) => {
-            console.log(this.headers);
             superagent
                 .get(Endpoints.TravelInformation.getStations())
                 .set(this.headers)
                 .end((error: HttpException, response: superagent.Response) => {
                     if (error) { return error; }
-                    res.send(response.text);
+                    res.json({
+                        message: JSON.parse(response.text),
+                        error: error
+                    })
                 });
         });
 

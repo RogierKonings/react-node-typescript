@@ -10,3 +10,6 @@ build/
 
 ## version control
 package-lock.json
+
+## IDE
+.vscode

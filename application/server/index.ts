@@ -1,6 +1,7 @@
 import app from './app';
 import * as cluster from 'cluster';
 import * as dotenv from 'dotenv';
+import HttpException from './exceptions/http-exception';
 
 
 dotenv.config();
@@ -23,15 +24,15 @@ class Server {
             console.log('Master cluster setting up', numWorkers, 'workers....');
             for (let i = 0; i < numWorkers; i++) cluster.fork();
 
-            cluster.on('online', (worker: any) => console.log('Worker', worker.process.pid, 'is online'));
-            cluster.on('exit', (worker: any, code: any, signal: any) => {
+            cluster.on('online', (worker: cluster.Worker) => console.log('Worker', worker.process.pid, 'is online'));
+            cluster.on('exit', (worker: cluster.Worker, code: any, signal: any) => {
                 console.log('Worker', worker.process.pid, 'died with code:', code, ', and signal:', signal);
                 console.log('Starting a new worker');
                 cluster.fork();
             });
 
         } else {
-            app.listen(port, (err: Error) => {
+            app.listen(port, (err: HttpException) => {
                 if (err) {
                     return console.log(err);
                 }

@@ -6,6 +6,9 @@ const path = require('path');
 const ENTRY_POINTS = ['./application/client/app/index'];
 const DEV_ENTRY_POINTS = ENTRY_POINTS.concat(['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000']);
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
     entry: process.NODE_ENV === 'production' ? ENTRY_POINTS : DEV_ENTRY_POINTS,
@@ -64,7 +67,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/api': {
-                target: 'http://localhost:3000'
+                target: `http://localhost:${process.env.PORT_CLIENT}`
             }
         }
     },

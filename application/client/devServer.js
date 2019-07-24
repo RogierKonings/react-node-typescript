@@ -11,7 +11,14 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const app = express();
 const compiler = webpack(config);
 
-const port = process.env.PORT || 8080;
+
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const DEFAULT_PORT = 3000;
+
+const port = process.env.PORT_CLIENT || DEFAULT_PORT;
 
 const devConfig = config.devServer;
 

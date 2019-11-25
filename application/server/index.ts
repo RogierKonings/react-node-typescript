@@ -1,7 +1,7 @@
 import app from './app';
 import * as cluster from 'cluster';
 import * as dotenv from 'dotenv';
-import HttpException from './exceptions/http-exception';
+import { HttpException } from '../models/http-exception';
 
 
 dotenv.config();

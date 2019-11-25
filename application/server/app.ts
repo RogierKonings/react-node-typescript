@@ -1,28 +1,40 @@
 import * as express from 'express';
 import path from 'path';
-import * as travelInformation from './routes/travel-information';
-import HttpException from './exceptions/http-exception';
+import * as travelInformation from './api/travel-information';
+import { HttpException } from '../models/http-exception';
 import * as addRequestId from 'express-request-id';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
+import { StationRepository } from './repository/station-repository';
+import { TravelInformation } from './api/travel-information';
 
 
 // const favicon = require('serve-favicon');
 // const logger = require('morgan');
 // const cookieParser = require('cookie-parser');
 
-
 class App {
-  public express: any;
+  public express: express.Express;
 
   constructor() {
     this.express = express();
+
+    this.setDatabase();
+
     this.setBodyParser();
     this.setSecurityHeaders();
     this.setLogger();
     this.mountRoutes();
 
     this.setErrorHandling();
+  }
+
+  private async setDatabase() {
+    const travelInformation = new TravelInformation();
+    const stations = await travelInformation.getAllStations();
+    const repo = new StationRepository(stations);
+    const stationBrn = await repo.getStation('BRN');
+    console.log('the station is:', stationBrn);
   }
 
   private setBodyParser(): void {
@@ -64,7 +76,7 @@ class App {
   }
 
   private mountRoutes(): void {
-    this.express.use('/api', travelInformation)
+    // this.express.use('/api', (travelInformation as express.Application));
     this.express.use('/', (req: express.Request, res: express.Response) => res.sendFile(path.join(__dirname, '../dist', 'index.html')));
   }
 
@@ -88,7 +100,7 @@ class App {
 
       // render the error page
       res.status(err.status || 500);
-      res.render('error');
+      res.json({error: 'error'});
     });
   }
 

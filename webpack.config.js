@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 
 const ENTRY_POINTS = ['./application/client/app/index'];
-const DEV_ENTRY_POINTS = ENTRY_POINTS.concat(['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000']);
+const DEV_ENTRY_POINTS = ENTRY_POINTS.concat(['webpack-hot-middleware/client?path=/__webpack_hmr']);
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -65,9 +65,15 @@ module.exports = {
         ]
     },
     devServer: {
+        hot: true,
+        // contentBase: path.join(__dirname, 'dist'),
+        // compress: true,
+        // port: process.env.CLIENT_PORT,
         proxy: {
-            '/api': {
-                target: `http://localhost:${process.env.PORT_CLIENT}`
+            '**': {
+                target: `http://localhost:${process.env.PORT}`,
+                secure: false,
+                logLevel: 'debug'
             }
         }
     },

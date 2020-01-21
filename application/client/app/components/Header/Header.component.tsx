@@ -6,17 +6,7 @@ export default class Header extends React.Component<{}, { heading: string }> {
 
 	constructor(props: any) {
 		super(props);
-		this.state = { heading: '' };
-	}
-
-	componentWillMount() {
-		superagent
-			.get('/api/hello')
-			.end((_, res) => {
-				this.setState({
-					heading: res.body.msg
-				});
-			});
+		this.state = { heading: 'Travel Information' };
 	}
 
 	render() {

@@ -7,8 +7,8 @@ export class StationRepository {
 
     constructor(stations: Station[]) {
         this.mongoose = mongoose;
-        this.stations = stations;
         this.connectToDatabase();
+        this.stations = stations;
         this.storeData(this.stations);
     }
 

@@ -7,17 +7,8 @@ export default class Footer extends React.Component {
 		return (
 			<div className="container">
 				<div className="btn-group">
-					<Link to="/nodejs">
-						<button className="btn btn-default btn-sm">NodeJS</button>
-					</Link>
-					<Link to="/express">
-						<button className="btn btn-default btn-sm">ExpressJS</button>
-					</Link>
-					<Link to="/mongo">
-						<button className="btn btn-default btn-sm">MongoDB</button>
-					</Link>
-					<Link to="/react">
-						<button className="btn btn-default btn-sm">ReactJS</button>
+					<Link to="/stations">
+						<button className="btn btn-default btn-sm">Stations</button>
 					</Link>
 				</div>
 			</div>

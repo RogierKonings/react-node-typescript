@@ -16,7 +16,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const DEFAULT_PORT = 3000;
+const DEFAULT_PORT = 4200;
 
 const port = process.env.PORT_CLIENT || DEFAULT_PORT;
 

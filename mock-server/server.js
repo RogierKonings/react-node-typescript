@@ -1,7 +1,7 @@
-const express = require('express'),
-  ngApiMock = require('ng-apimock')(),
-  path = require('path'),
-  cors = require('cors');
+const express = require('express');
+const ngApiMock = require('ng-apimock')();
+const path = require('path');
+const cors = require('cors');
 
 const mocksSourceDirectory = path.resolve(`${__dirname}/mocks`);
 const mocksOutputDirectory = path.resolve(`${__dirname}/../dist/ngApimock`);

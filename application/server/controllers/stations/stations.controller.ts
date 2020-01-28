@@ -2,10 +2,11 @@ import * as superagent from 'superagent';
 import * as express from 'express';
 import { Endpoints } from '../../../configuration/endpoints';
 import { Station } from '../../../models/station.model';
+import { StationRepository } from '../../repository/station-repository';
 
 class StationsController {
 
-    public path = `${Endpoints.TravelInformation.getStations}`;
+    public path = `${Endpoints.TravelInformation.Stations}`;
     public router = express.Router();
 
     constructor() {
@@ -18,8 +19,12 @@ class StationsController {
 
     private getAllStations = (request: express.Request, response: express.Response) => {
         this.retrieveStations()
-            .then((result: Station[]) => {
-                response.send(result);
+            .then((station: Station[]) => {
+                const repo = new StationRepository();
+                repo.storeData(station);
+                
+
+                // response.send(station);
             })
             .catch(() => new Error('Error retrieving the stations from the API'))
 

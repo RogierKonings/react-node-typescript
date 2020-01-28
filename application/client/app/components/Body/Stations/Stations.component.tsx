@@ -18,7 +18,7 @@ export default class Stations extends React.Component<MyProps, MyState> {
 
     componentDidMount() {
         event.preventDefault();
-        fetch(`${Endpoints.TravelInformation.getStations()}`)
+        fetch(`${Endpoints.TravelInformation.Stations}`)
             .then(response => response.json())
             .then((stations: Array<Station>) => this.setState({ stations: stations}));
     }

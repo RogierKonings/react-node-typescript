@@ -3,13 +3,10 @@ import { Station, StationModel } from '../../models/station.model';
 
 export class StationRepository {
     public mongoose: mongoose.Mongoose;
-    public stations: Station[];
 
-    constructor(stations: Station[]) {
+    constructor() {
         this.mongoose = mongoose;
-        this.stations = stations;
         this.connectToDatabase();
-        this.storeData(this.stations);
     }
 
     private connectToDatabase(): void {
@@ -21,34 +18,31 @@ export class StationRepository {
         });
     }
 
-    private async storeData(stations: Station[]) {
+    public async storeData(stations: Station[]) {
 
-        // const StationModel = new Station().getModelForClass(Station, {
-        //     existingMongoose: mongoose,
-        //     schemaOptions: { collection: 'stations' }});
+        const StationModel = new Station().getModelForClass(Station, {
+            existingMongoose: mongoose,
+            schemaOptions: { collection: 'stations' }});
 
-        // const trial = new StationModel(stations);
-        // trial.save();
-        // const stationSchema = new this.mongoose.Schema({
-        //     StationModel
-        // });
+        const trial = new StationModel(stations);
+        trial.save();
+        const stationSchema = new this.mongoose.Schema({
+            StationModel
+        });
         
-
-        
-
-        // StationModel.create(stations);
         stations.forEach(async station => {
-            await StationModel.create(station); 
+            await StationModel.create(station);
 
-            // const StationSchema = this.mongoose.model('Station', stationSchema);
-            // const myData = new StationSchema((station as any));
-            // myData.save()
-            //     .then((item: any) => {
-            //         console.log(item, 'item saved to the database');
-            //     })
-            //     .catch(err => {
-            //         console.log(err, 'unable to save');
-            //     });
+
+            const StationSchema = this.mongoose.model('Station', stationSchema);
+            const myData = new StationSchema((station as any));
+            myData.save()
+                .then((item: any) => {
+                    console.log(item, 'item saved to the database');
+                })
+                .catch(err => {
+                    console.log(err, 'unable to save');
+                });
             
         });
     }

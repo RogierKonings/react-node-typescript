@@ -7,9 +7,8 @@
     "start:client": "cross-env NODE_ENV=development tsc && node ./application/client/devServer",
     "start:database": "cross-env mongod --config /usr/local/etc/mongod.conf",
     "start:mock": "ts-node-dev ./mock-server/server.js",
-    "dev:server": "cross-env npm run start:server & npm run start:database",
+    "dev:server": "cross-env npm run start:server & npm run start:database & npm run start:client",
     "dev:client": "cross-env npm run start:client & npm run start:mock",
-    "start": "cross-env npm run start:client & npm run dev:server",
     "build:client": "cross-env NODE_ENV=production ./node_modules/.bin/webpack -p --progress"
   },
   "repository": {

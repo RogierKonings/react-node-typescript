@@ -8,7 +8,7 @@ type MyProps = {};
 type MyState = { stations: Array<Station> };
 
 export default class Stations extends React.Component<MyProps, MyState> {
-    
+
     constructor(props: MyProps) {
         super(props);
         this.state = {
@@ -20,20 +20,19 @@ export default class Stations extends React.Component<MyProps, MyState> {
         event.preventDefault();
         fetch(`${Endpoints.TravelInformation.Stations}`)
             .then(response => response.json())
-            .then((stations: Array<Station>) => this.setState({ stations: stations}));
+            .then((stations: Array<Station>) => this.setState({ stations }));
     }
 
 	render() {
         const { stations } = this.state;
 		return (
 			<ul>
-                {stations.map((station: Station) => 
+                {stations.map((station: Station) =>
                     <li key={station.UICCode}>.
                         <span>{station.namen.lang}</span>
-                    </li>    
+                    </li>
                 )}
             </ul>
 		);
 	}
-
 }

@@ -10,7 +10,7 @@ import Stations from './components/Body/Stations/Stations.component';
 
 const AppRouter = () => (
 	<BrowserRouter>
-		<Route path="/" component={AppLayout}></Route>
+		<Route path="/" component={AppLayout} />
 		<Route path="/stations" component={Stations} />
 	</BrowserRouter>
 );

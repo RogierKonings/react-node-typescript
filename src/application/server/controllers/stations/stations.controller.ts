@@ -43,9 +43,7 @@ class StationsController {
                 const stations: Station[] = JSON.parse(response.text).payload;
                 return stations;
             })
-            .catch(error => {
-                return error;
-            });
+            .catch(error => error);
     }
 
     // private storeStations(stations: Station[]): void {

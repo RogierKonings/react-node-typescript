@@ -5,7 +5,7 @@
 //       </button>
 //     );
 //   }
-  
+
 //   class Board extends React.Component {
 //     renderSquare(i: number) {
 //       return (
@@ -15,7 +15,7 @@
 //         />
 //       );
 //     }
-  
+
 //     render() {
 //       return (
 //         <div>
@@ -38,7 +38,7 @@
 //       );
 //     }
 //   }
-  
+
 //   class Game extends React.Component {
 //     constructor(props) {
 //       super(props);
@@ -52,7 +52,7 @@
 //         xIsNext: true
 //       };
 //     }
-  
+
 //     handleClick(i: number) {
 //       const history = this.state.history.slice(0, this.state.stepNumber + 1);
 //       const current = history[history.length - 1];
@@ -71,19 +71,19 @@
 //         xIsNext: !this.state.xIsNext
 //       });
 //     }
-  
+
 //     jumpTo(step: number) {
 //       this.setState({
 //         stepNumber: step,
 //         xIsNext: (step % 2) === 0
 //       });
 //     }
-  
+
 //     render() {
 //       const history = this.state.history;
 //       const current = history[this.state.stepNumber];
 //       const winner = calculateWinner(current.squares);
-  
+
 //       const moves = history.map((step: number, move: number) => {
 //         const desc = move ?
 //           'Go to move #' + move :
@@ -94,14 +94,14 @@
 //           </li>
 //         );
 //       });
-  
+
 //       let status;
 //       if (winner) {
 //         status = "Winner: " + winner;
 //       } else {
 //         status = "Next player: " + (this.state.xIsNext ? "X" : "O");
 //       }
-  
+
 //       return (
 //         <div className="game">
 //           <div className="game-board">
@@ -118,11 +118,11 @@
 //       );
 //     }
 //   }
-  
+
 //   // ========================================
-  
+
 //   ReactDOM.render(<Game />, document.getElementById("root"));
-  
+
 //   function calculateWinner(squares: Array<String>) {
 //     const lines = [
 //       [0, 1, 2],
@@ -142,4 +142,3 @@
 //     }
 //     return null;
 //   }
-  

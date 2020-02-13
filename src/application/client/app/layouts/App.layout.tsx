@@ -7,7 +7,7 @@ import Header from '../components/Header/Header.component';
 import Footer from '../components/Footer/Footer.component';
 
 
-export default class AppLayout extends React.Component {
+export default class AppLayout extends React.PureComponent {
 	render(){
 		return (
 			<Provider store={configureStore({ initialState: {} })}>

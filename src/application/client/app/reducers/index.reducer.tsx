@@ -1,17 +1,17 @@
 
-export interface IAction {
+export interface Action {
 	type: string;
 }
 
-export interface IApplicationState {
-
+export interface ApplicationState {
+	initialState: object
 }
 
-const initialState: IApplicationState = {
-
+const initialState: ApplicationState = {
+	initialState: {}
 }
 
-export const reducer = (state: IApplicationState = initialState, action: IAction) => {
+export const reducer = (state: ApplicationState = initialState, action: Action) => {
 
 	switch(action.type) {
 

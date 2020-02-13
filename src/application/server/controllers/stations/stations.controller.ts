@@ -7,6 +7,7 @@ import { StationRepository } from '../../repository/station-repository';
 class StationsController {
 
     public path = `${Endpoints.TravelInformation.Stations}`;
+
     public router = express.Router();
 
     constructor() {
@@ -18,11 +19,11 @@ class StationsController {
     }
 
     private getAllStations = (request: express.Request, response: express.Response) => {
-        this.retrieveStations()
+        StationsController.retrieveStations()
             .then((station: Station[]) => {
                 const repo = new StationRepository();
                 repo.storeData(station);
-                
+
 
                 // response.send(station);
             })
@@ -30,7 +31,7 @@ class StationsController {
 
     }
 
-    private retrieveStations(): Promise<Station[]> {
+    private static retrieveStations(): Promise<Station[]> {
         const headers = {
             'Ocp-Apim-Subscription-Key': process.env.API_KEY,
             'Accept': 'application/json'
@@ -47,9 +48,9 @@ class StationsController {
             });
     }
 
-    private storeStations(stations: Station[]): void {
+    // private storeStations(stations: Station[]): void {
 
-    }
+    // }
 
 }
 

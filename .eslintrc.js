@@ -94,6 +94,12 @@ module.exports = {
     "import/no-named-as-default-member": 0,
     "import/namespace": 0,
     "import/named": 0,
+    "import/extensions": [
+      "never",
+      {
+        ignorePackages: true | false,
+      }
+    ],
 
     "jsx-a11y/anchor-is-valid": 0,
     "jsx-a11y/click-events-have-key-events": 0,

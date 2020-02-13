@@ -20,16 +20,16 @@ export class StationRepository {
 
     public async storeData(stations: Station[]) {
 
-        const StationModel = new Station().getModelForClass(Station, {
-            existingMongoose: mongoose,
-            schemaOptions: { collection: 'stations' }});
+        // const StationModel = new Station().getModelForClass(Station, {
+        //     existingMongoose: mongoose,
+        //     schemaOptions: { collection: 'stations' }});
 
         const trial = new StationModel(stations);
         trial.save();
         const stationSchema = new this.mongoose.Schema({
             StationModel
         });
-        
+
         stations.forEach(async station => {
             await StationModel.create(station);
 
@@ -43,19 +43,19 @@ export class StationRepository {
                 .catch(err => {
                     console.log(err, 'unable to save');
                 });
-            
+
         });
     }
 
-    private createDatabaseSchema(): void {
-        // StationModel.create
-    }
+    // private createDatabaseSchema(): void {
+    //     // StationModel.create
+    // }
 
-    public async getStation(code: string): Promise<Station> {
+    public static async getStation(code: string): Promise<Station> {
         return StationModel.findOne({'code': code});
     }
 
-    async getStations(): Promise<Station[]> {
+    public static async getStations(): Promise<Station[]> {
         return StationModel.find({});
     }
 }

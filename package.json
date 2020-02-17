@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start:server": "cross-env NODE_ENV=development ts-node-dev --inspect --ignore 'client/' ./application/server/index",
-    "start:client": "cross-env NODE_ENV=development tsc && node ./application/client/devServer",
+    "start:server": "cross-env NODE_ENV=development ts-node-dev --inspect --ignore 'client/' ./src/server/index",
+    "start:client": "cross-env NODE_ENV=development tsc && node ./src/client/devServer",
     "start:database": "cross-env mongod --config /usr/local/etc/mongod.conf",
     "start:mock": "ts-node-dev ./mock-server/server.js",
     "dev:server": "cross-env npm run start:server & npm run start:database & npm run start:client",

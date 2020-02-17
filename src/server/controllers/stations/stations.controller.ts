@@ -11,6 +11,7 @@ class StationsController {
     public router = express.Router();
 
     constructor() {
+        console.log('initialize controller');
         this.initializeRoutes();
     }
 
@@ -22,7 +23,7 @@ class StationsController {
         StationsController.retrieveStations()
             .then((station: Station[]) => {
                 const repo = new StationRepository();
-                repo.storeData(station);
+                StationRepository.storeData(station);
 
 
                 // response.send(station);

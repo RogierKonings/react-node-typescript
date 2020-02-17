@@ -1,16 +1,16 @@
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const path = require('path');
+import * as webpack from 'webpack';
+import * as dotenv from 'dotenv';
+import { HtmlWebpackPlugin } from 'html-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import * as path from 'path';
 
-const ENTRY_POINTS = ['./application/client/app/index'];
+const ENTRY_POINTS = ['./src/client/app/index'];
 const DEV_ENTRY_POINTS = ENTRY_POINTS.concat(['webpack-hot-middleware/client?path=/__webpack_hmr']);
 
-const dotenv = require('dotenv');
+
 dotenv.config();
 
 module.exports = {
-    devtool: 'cheap-module-eval-source-map',
     entry: process.NODE_ENV === 'production' ? ENTRY_POINTS : DEV_ENTRY_POINTS,
     output: {
         path: path.join(__dirname, 'dist'),
@@ -44,7 +44,7 @@ module.exports = {
             }
         }
     },
-    devtool: 'source-map',
+    devtool: 'cheap-module-eval-source-map',
     resolve: {
         extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']
     },

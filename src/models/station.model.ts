@@ -1,5 +1,5 @@
 import { Track } from './track.model';
-import { prop, arrayProp, Typegoose } from '@typegoose/typegoose';
+import { prop, arrayProp, getModelForClass } from '@typegoose/typegoose';
 import * as mongoose from 'mongoose';
 
 export enum StationType {
@@ -13,7 +13,7 @@ export enum StationType {
     MEGA_STATION = 'MEGA_STATION'
 }
 
-export class Station extends Typegoose {
+export class Station {
     @arrayProp({ items: Track })
     sporen: Track[];
 
@@ -64,7 +64,6 @@ export class Station extends Typegoose {
     EVACode!: string;
 }
 
-export const StationModel = new Station().getModelForClass(Station, {
+export const StationModel = getModelForClass(Station, {
     existingMongoose: mongoose,
-    schemaOptions: { collection: 'stations' }
-});
+    schemaOptions: { collection: 'stations' }});

@@ -6,7 +6,7 @@ import { StationRepository } from '../../repository/station-repository';
 
 class StationsController {
 
-    public path = `${Endpoints.TravelInformation.Stations}`;
+    public path = Endpoints.TravelInformation.Stations;
 
     public router = express.Router();
 
@@ -20,6 +20,7 @@ class StationsController {
     }
 
     private getAllStations = (request: express.Request, response: express.Response) => {
+        console.log('getting stations');
         StationsController.retrieveStations()
             .then((station: Station[]) => {
                 const repo = new StationRepository();

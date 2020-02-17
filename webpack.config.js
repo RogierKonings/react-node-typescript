@@ -1,13 +1,12 @@
-import * as webpack from 'webpack';
-import * as dotenv from 'dotenv';
-import { HtmlWebpackPlugin } from 'html-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import * as path from 'path';
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require('path');
 
 const ENTRY_POINTS = ['./src/client/app/index'];
 const DEV_ENTRY_POINTS = ENTRY_POINTS.concat(['webpack-hot-middleware/client?path=/__webpack_hmr']);
 
-
+const dotenv = require('dotenv');
 dotenv.config();
 
 module.exports = {

@@ -1,6 +1,5 @@
-import { createStore, Store, applyMiddleware } from 'redux';
+import { createStore, Store } from 'redux';
 import { reducer, ApplicationState } from '../reducers/index.reducer';
-import { routerMiddleware } from 'react-router-redux';
 
 export default function configureStore(initialState: ApplicationState): Store<ApplicationState> {
   const store = createStore(reducer, initialState);

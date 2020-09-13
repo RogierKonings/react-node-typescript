@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
 
-import * as superagent from 'superagent';
-
 export default function Header(): JSX.Element {
-  const [heading, setHeading] = useState('Travel Information');
+  const [heading] = useState('Travel Information');
 
   return (
     <div className="container">

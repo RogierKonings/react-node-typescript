@@ -19,7 +19,7 @@ export class StationRepository {
     });
   }
 
-  public static async storeData(stations: Station[]): Promise<void> {
+  public async storeData(stations: Station[]): Promise<void> {
     // const StationModel = getModelForClass(Station, {
     //     existingMongoose: mongoose,
     //     schemaOptions: { collection: 'stations' }});
@@ -29,6 +29,8 @@ export class StationRepository {
     // const stationSchema = new this.mongoose.Schema({
     //     StationModel
     // });
+
+    console.log('this', this.mongoose);
 
     stations.forEach(async station => {
       await StationModel.create(station);

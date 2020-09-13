@@ -1,9 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-
 import AppRouter from './App.Router';
 import './index.html';
-
 import './style.css';
 
 ReactDOM.render(<AppRouter />, document.getElementById('root'));

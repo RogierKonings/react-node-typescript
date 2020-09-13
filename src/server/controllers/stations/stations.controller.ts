@@ -5,53 +5,48 @@ import { Station } from '../../../models/station.model';
 import { StationRepository } from '../../repository/station-repository';
 
 class StationsController {
+  public router = express.Router();
 
-    public path = Endpoints.TravelInformation.Stations;
+  public headers = {
+    'Ocp-Apim-Subscription-Key': process.env.API_KEY,
+    'Accept': 'application/json',
+  };
 
-    public router = express.Router();
+  constructor() {
+    console.log('initialize controller');
+    this.initializeRoutes();
+  }
 
-    constructor() {
-        console.log('initialize controller');
-        this.initializeRoutes();
-    }
+  public initializeRoutes(): void {
+    this.router.get(Endpoints.TravelInformation.Stations, this.getAllStations);
+  }
 
-    public initializeRoutes(): void {
-        this.router.get(this.path, this.getAllStations);
-    }
+  private getAllStations = (request: express.Request, response: express.Response) => {
+    console.log('getting stations');
+    this.requestStationsFromExternalApi()
+      .then((station: Station[]) => {
+        const repo = new StationRepository();
+        repo.storeData(station);
 
-    private getAllStations = (request: express.Request, response: express.Response) => {
-        console.log('getting stations');
-        StationsController.retrieveStations()
-            .then((station: Station[]) => {
-                const repo = new StationRepository();
-                StationRepository.storeData(station);
+        response.send(station);
+      })
+      .catch(() => new Error('Error retrieving the stations from the API'));
+  };
 
+  private requestStationsFromExternalApi(): Promise<Station[]> {
+    return superagent
+      .get(`${process.env.TRAVEL_INFORMATION_BASEURL}${process.env.TRAVEL_INFORMATION_STATIONS}`)
+      .set(this.headers)
+      .then((response: superagent.Response) => {
+        const stations: Station[] = JSON.parse(response.text).payload;
+        return stations;
+      })
+      .catch(error => error);
+  }
 
-                // response.send(station);
-            })
-            .catch(() => new Error('Error retrieving the stations from the API'))
+  // private storeStations(stations: Station[]): void {
 
-    }
-
-    private static retrieveStations(): Promise<Station[]> {
-        const headers = {
-            'Ocp-Apim-Subscription-Key': process.env.API_KEY,
-            'Accept': 'application/json'
-        };
-        return superagent
-            .get(`${process.env.TRAVELINFORMATION_BASEURL}${process.env.TRAVELINFOMRATION_STATIONS}`)
-            .set(headers)
-            .then((response: superagent.Response) => {
-                const stations: Station[] = JSON.parse(response.text).payload;
-                return stations;
-            })
-            .catch(error => error);
-    }
-
-    // private storeStations(stations: Station[]): void {
-
-    // }
-
+  // }
 }
 
 export default StationsController;

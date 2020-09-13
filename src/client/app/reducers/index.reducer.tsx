@@ -1,21 +1,18 @@
-
 export interface Action {
-	type: string;
+  type: string;
 }
 
 export interface ApplicationState {
-	initialState: object
+  initialState: Record<string, unknown>;
 }
 
 const initialState: ApplicationState = {
-	initialState: {}
-}
+  initialState: {},
+};
 
-export const reducer = (state: ApplicationState = initialState, action: Action) => {
-
-	switch(action.type) {
-
-		default:
-			return state;
-	}
+export const reducer = (state: ApplicationState = initialState, action: Action): ApplicationState => {
+  switch (action.type) {
+    default:
+      return state;
+  }
 };

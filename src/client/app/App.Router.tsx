@@ -5,14 +5,13 @@ import { createBrowserHistory } from 'history';
 
 import AppLayout from './layouts/App.layout';
 
-
 import Stations from './components/Body/Stations/Stations.component';
 
-const AppRouter = () => (
-	<BrowserRouter>
-		<Route path="/" component={AppLayout} />
-		<Route path="/stations" component={Stations} />
-	</BrowserRouter>
+const AppRouter = (): JSX.Element => (
+  <BrowserRouter>
+    <Route path="/" component={AppLayout} />
+    <Route path="/stations" component={Stations} />
+  </BrowserRouter>
 );
 
 export default AppRouter;

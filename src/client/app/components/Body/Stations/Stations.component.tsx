@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 
 import { Station } from '../../../../../models/station.model';
 
@@ -7,32 +8,22 @@ import { Endpoints } from '../../../../../configuration/endpoints';
 type MyProps = {};
 type MyState = { stations: Array<Station> };
 
-export default class Stations extends React.Component<MyProps, MyState> {
+export default function Stations(): JSX.Element {
+  const [stations, setStations] = useState([]);
 
-    constructor(props: MyProps) {
-        super(props);
-        this.state = {
-            stations: []
-        };
-    }
+  useEffect(() => {
+    fetch(`${Endpoints.TravelInformation.Stations}`)
+      .then(response => response.json())
+      .then((response: Array<Station>) => setStations(response));
+  });
 
-    componentDidMount() {
-        event.preventDefault();
-        fetch(`${Endpoints.TravelInformation.Stations}`)
-            .then(response => response.json())
-            .then((stations: Array<Station>) => this.setState({ stations }));
-    }
-
-	render() {
-        const { stations } = this.state;
-		return (
-			<ul>
-                {stations.map((station: Station) =>
-                    <li key={station.UICCode}>.
-                        <span>{station.namen.lang}</span>
-                    </li>
-                )}
-            </ul>
-		);
-	}
+  return (
+    <ul>
+      {stations.map((station: Station) => (
+        <li key={station.UICCode}>
+          <span>{station.namen.lang}</span>
+        </li>
+      ))}
+    </ul>
+  );
 }
